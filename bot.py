@@ -1,4 +1,6 @@
-# coding=<UTF-8>
+#!/usr/bin/python
+# -*- coding: utf8 -*-
+
 import telebot
 
 
