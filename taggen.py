@@ -1,3 +1,4 @@
+# coding=<UTF-8>
 import random
 import gspread
 from oauth2client.service_account import ServiceAccountCredentials
