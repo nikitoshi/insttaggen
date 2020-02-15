@@ -1,18 +1,27 @@
 #!/usr/bin/python
 # -*- coding: utf8 -*-
+import logging
+import os
 
-import telebot
+import aiohttp
 
+from aiogram import Bot, Dispatcher, executor, types
 
-from telebot import apihelper
+logging.basicConfig(level=logging.INFO)
 
+API_TOKEN = os.getenv("TELEGRAM_API_TOKEN")
+PROXY_URL = os.getenv("TELEGRAM_PROXY_URL")
+PROXY_AUTH = aiohttp.BasicAuth(
+    login=os.getenv("TELEGRAM_PROXY_LOGIN"),
+    password=os.getenv("TELEGRAM_PROXY_PASSWORD")
+)
 
-# apihelper.proxy = {'http':'http://85.187.17.39:53281'}
+bot = Bot(token=API_TOKEN, proxy=PROXY_URL, proxy_auth=PROXY_AUTH)
+dp = Dispatcher(bot)
 
-bot = telebot.TeleBot('1016000111:AAE51h1hhfe8PvRNO4hxjx5EOPCCyogrPJQ')
-
-@bot.message_handler(commands=['start'])
-def start_message(message):
-    bot.send_message(message.chat.id, 'Привет, ты написал мне /start')
-
-bot.polling()
+@dp.message_handler(commands=['start', 'help'])
+async def send_welcome(message: types.Message):
+    """
+    This handler will be called when user sends `/start` or `/help` command
+    """
+    await message.reply("Hi!\nI'm EchoBot!\nPowered by aiogram.")
