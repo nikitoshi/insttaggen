@@ -27,8 +27,10 @@ dp = Dispatcher(bot)
 
 
 @dp.message_handler(commands=['start', 'help'])
-async def start_message(message):
-   bot.send_message(message.chat.id, 'Привет, ты написал мне /start')
+async def send_welcome(message: types.Message):
+  await message.answer(
+      "Сколько тэгов сгенерировать?"
+  )
 
 
 if __name__ == '__main__':
