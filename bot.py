@@ -50,7 +50,7 @@ async def get_var(message):
     k = int(message.text)
 
     tags = str(random.sample(tag_list, int(k)))
-    tags_res = tags.replace('\'', '').replace('[', '').replace(']', '')
+    tags_res = tags.replace('\'', '').replace('[', '').replace(']', '').replace(',', '')
 
     await message.answer(tags_res)
 
