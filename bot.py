@@ -32,8 +32,8 @@ async def send_welcome(message: types.Message):
 
 @dp.message_handler()
 async def get_var(message):
-    # await message.answer(message.text)
-    print(message)
+    await message.answer(message.text)
+    print(message.text)
 
 
 
