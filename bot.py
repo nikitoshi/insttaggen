@@ -28,9 +28,12 @@ dp = Dispatcher(bot)
 
 @dp.message_handler(commands=['start', 'help'])
 async def send_welcome(message: types.Message):
-  await message.answer(
-      "Сколько тэгов сгенерировать?"
-  )
+  await message.answer("Сколько тэгов сгенерировать?")
+
+@dp.message_handler()
+async def get_var(message):
+    print(message)
+
 
 
 if __name__ == '__main__':
