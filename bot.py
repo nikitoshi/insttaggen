@@ -1,5 +1,8 @@
 #!/usr/bin/python
 # -*- coding: utf8 -*-
+import random
+import gspread
+from oauth2client.service_account import ServiceAccountCredentials
 import logging
 import os
 from dotenv import load_dotenv
@@ -11,6 +14,18 @@ if os.path.exists(dotenv_path):
 import aiohttp
 
 from aiogram import Bot, Dispatcher, executor, types
+
+# Авторизация
+scope = ['https://spreadsheets.google.com/feeds',
+         'https://www.googleapis.com/auth/drive']
+credentials = ServiceAccountCredentials.from_json_keyfile_name('tag-gen-0e74ede9572f.json', scope)
+gc = gspread.authorize(credentials)
+
+# Открываем таблицу и получаем все значения
+wks = gc.open("tag-gen").sheet1
+tag_list = wks.get_all_values()
+
+# БОТ
 
 logging.basicConfig(level=logging.INFO)
 
@@ -32,8 +47,15 @@ async def send_welcome(message: types.Message):
 
 @dp.message_handler()
 async def get_var(message):
-    await message.answer("Вы написали:", message.text)
-    print(message.text)
+    # await message.answer("Вы написали:" (message.text))
+    k = int(message.text)
+
+    tags = str(random.sample(tag_list, int(k)))
+    tags_res = tags.replace('\'', '').replace('[', '').replace(']', '')
+
+    await message.answer(tags_res)
+
+    print(tags_res)
 
 
 
