@@ -47,7 +47,6 @@ async def send_welcome(message: types.Message):
 
 @dp.message_handler()
 async def get_var(message):
-    # await message.answer("Вы написали:" (message.text))
     k = int(message.text)
 
     tags = str(random.sample(tag_list, int(k)))
