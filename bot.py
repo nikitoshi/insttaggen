@@ -48,6 +48,7 @@ async def send_welcome(message: types.Message):
 @dp.message_handler()
 async def get_var(message):
     k = int(message.text)
+    print("Печатаю" (k))
 
     tags = str(random.sample(tag_list, int(k)))
     tags_res = tags.replace('\'', '').replace('[', '').replace(']', '').replace(',', '')
