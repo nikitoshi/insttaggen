@@ -32,7 +32,7 @@ async def send_welcome(message: types.Message):
 
 @dp.message_handler()
 async def get_var(message):
-    print(message)
+    print(message.text)
 
 
 
