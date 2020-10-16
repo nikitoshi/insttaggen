@@ -48,10 +48,11 @@ async def send_welcome(message: types.Message):
 
 @dp.message_handler()
 async def get_var(message):
-    k = int(message.text)
-    print("Печатаю", int(k))
+    const_tags = '#маникюрфрязино ' + '#фрязиноманикюр ' + '#ногтифрязино ' + '#фрязиноногти '
+    k = int(message.text) - int(4)
+    print("Печатаю", int(k) + int(4))
 
-    tags = str(random.sample(tag_list, int(k)))
+    tags = const_tags + str(random.sample(tag_list, int(k)))
     tags_res = tags.replace('\'', '').replace('[', '').replace(']', '').replace(',', '')
 
     await message.answer(tags_res)
